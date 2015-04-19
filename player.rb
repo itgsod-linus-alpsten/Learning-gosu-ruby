@@ -1,11 +1,33 @@
 class Player
-  def initialize(window)
-    @image = Gosu::Image.new(window, '8_bit_mario.png', false)
+
+  def initialize(window,img)
+    @image = Gosu::Image.new(window, img, false)
     @x = 0
     @y = 0
     @vel_x = 0.0
     @vel_y = 0.0
     @jump = true
+    @window = window
+  end
+
+  def x
+    @x
+  end
+
+  def y
+    @y
+  end
+
+  def width
+    @image.width
+  end
+
+  def height
+    @image.height
+  end
+
+  def get_var(var)
+    self.instance_variable_get(("@" + var).intern)
   end
 
   def warp(x,y)
@@ -22,20 +44,24 @@ class Player
 
   def move
     @x += @vel_x
-    @x %= 800
+    @x %= @window.width
     @y -= @vel_y
 
     @vel_x *= 0.9
   end
 
-  def gravity
-    if @y > 436
-      @y = 436
+  def gravity(y=500)
+    if @y > y - @image.height
+      @y = y - @image.height
       @vel_y = 0.0
       @jump = true
-    elsif @y < 436
+    elsif @y < y - @image.height
       @vel_y -= 0.5
     end
+  end
+
+  def on_block(y)
+    @y = y - @image.height
   end
 
   def jump
@@ -43,6 +69,11 @@ class Player
       @vel_y = 10.0
       @jump = false
     end
+  end
+
+  def stop
+    @vel_y = 0
+    @vel_x = 0
   end
 
   def draw
