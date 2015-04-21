@@ -44,6 +44,14 @@ class Block
     y0>@y_edge or y1<@y
   end
 
+  def get_y
+    @y
+  end
+
+  def get_x
+    @x
+  end
+
   def draw
     @image.draw(@x, @y, 1)
   end

@@ -2,8 +2,8 @@ class Player
 
   def initialize(window,img)
     @image = Gosu::Image.new(window, img, false)
-    @x = 0
-    @y = 0
+    @x = 100
+    @y = 100
     @vel_x = 0.0
     @vel_y = 0.0
     @jump = true
@@ -50,13 +50,17 @@ class Player
     @vel_x *= 0.9
   end
 
-  def gravity(y=500)
-    if @y > y - @image.height
-      @y = y - @image.height
+  def gravity(block)
+    @vel_y -= 0.5
+    if block.class == Block
+      floor = block.get_y
+    else
+      floor = 500
+    end
+    if @y + @image.height >= floor
+      @y = floor - @image.height
       @vel_y = 0.0
       @jump = true
-    elsif @y < y - @image.height
-      @vel_y -= 0.5
     end
   end
 

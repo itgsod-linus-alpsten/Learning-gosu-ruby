@@ -1,4 +1,5 @@
-a = Array.new(4,Array.new(3))
-b = a[0..2][0..2]
+a = Array.new(3,(0..3).to_a)
+i = 0
+b = a[0..3][1]
 p a
 p b
