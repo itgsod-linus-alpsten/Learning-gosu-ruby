@@ -1,0 +1,7 @@
+check blocks around player based on velocity
+only check blocks above/below player if vertical/horisontal velocity is above/below 0 (dont need to check blocks above is falling)
+for multiple block types: have construct a coordinate system for each block type
+impliment traits (like colission, gravity)
+use z coordinate to make player able to fall through blocks (blocks on z = 0 is not checked if player z = 1)
+ground should be constructed with "super blocks" (super blocks cover all z levels)
+block_check should be in player update function
